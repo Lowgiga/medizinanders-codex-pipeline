@@ -1,0 +1,26 @@
+# Unvollständige Arbeitsvorlage, keine Recherche- oder Freigabenachweise.
+# Platzhalter ersetzen; Quellenzugriff und Prüfungen nur nach tatsächlicher Prüfung setzen.
+artefakt_id: A08
+projekt_id: '{{projekt_id}}'
+version: 0.1.0
+datum: '{{ISO8601}}'
+autor: '{{autor}}'
+status: Entwurf
+eingaben:
+- artefakt_id: A07
+  version: '{{A07.version}}'
+  sha256: '{{A07.sha256}}'
+quellen: []
+offene_punkte:
+- Pflichtangaben und tatsächliche Nachweise ergänzen.
+gesperrt: true
+sperrgrund: Unvollständige Vorlage; keine Produktions- oder Freigabeberechtigung.
+beispiel: false
+inhalt:
+  preview:
+    path: '{{Pfad zum echten Preview}}'
+    sha256: '{{SHA256 der Preview-Datei}}'
+  render_real: false
+  operator: '{{Render-Operator}}'
+  render_zeitpunkt: '{{ISO8601-Zeitpunkt}}'
+  freeze: '{{G3-Freeze}}'

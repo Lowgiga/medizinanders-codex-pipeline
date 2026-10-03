@@ -1,0 +1,79 @@
+schema_version: '1.0.0'
+kanal: MedizinAnders
+sprache: de
+ausrichtung: journalistisch-analytische Gesundheitsinformationen
+zielgruppe: 'STANDARDVORSCHLAG: deutschsprachige Erwachsene ohne medizinische Fachausbildung'
+format:
+  profil: MA-SHORT-58-v1.0
+  dauer_ms: 58000
+  breite: 1080
+  hoehe: 1920
+  fps: '30/1'
+  frames: 1740
+  wortzahl_min: 100
+  wortzahl_max: 130
+  cta_anzahl: 1
+  abschnitte:
+    - {funktion: Hook, start_ms: 0, ende_ms: 3000}
+    - {funktion: Open Loop, start_ms: 3000, ende_ms: 8000}
+    - {funktion: Payload, start_ms: 8000, ende_ms: 41000}
+    - {funktion: Verdichtung, start_ms: 41000, ende_ms: 48000}
+    - {funktion: CTA, start_ms: 48000, ende_ms: 52000}
+    - {funktion: Ausklang, start_ms: 52000, ende_ms: 54000}
+    - {funktion: Disclaimer, start_ms: 54000, ende_ms: 58000}
+  hook_schnitt_ms: 3000
+disclaimer: 'Journalistischer Analyse-Content. Kein medizinischer Rat.'
+video:
+  sar: '1:1'
+  scan: progressiv
+  pixel_format: yuv420p
+  farbraum: BT.709 SDR
+  codec: H.264/AVC High
+  level: '4.1'
+  bitrate_ziel: 10000000
+  bitrate_max: 16000000
+  closed_gop_max_frames: 60
+  b_frames: 2
+  container: MP4
+  fast_start: true
+audio:
+  codec: AAC-LC
+  samplerate: 48000
+  channels: 2
+  bitrate_ziel: 384000
+  lufs_ziel: -14
+  lufs_min: -15
+  lufs_max: -13
+  true_peak_max: -1.5
+  musik_unter_stimme_db: 18
+  musik_db_min: 15
+  musik_db_max: 21
+  ohne_messbare_spuren: Musik entfernen
+  stil: ruhig, erwachsen, Deutsch, ohne imitierte Person oder ärztliche Autorität
+  stimmen_standardvorschlag: männliche Stimme; bei G0 bestätigen
+  musik: instrumental, kein Gesang, keine dramatischen Stings
+untertitel:
+  format: UTF-8 SRT und eingebrannt
+  font: Montserrat Bold
+  px: 52
+  farbe: weiß
+  max_zeilen: 2
+  max_zeichen_pro_zeile: 28
+  max_cps: 18
+  cue_min_ms: 800
+  cue_max_ms: 4000
+  sync_max_ms: 100
+  x_min: 90
+  x_max: 930
+  y_min: 192
+  y_max: 1536
+  unterkante: 1520
+  quellen_y: [1200, 1320]
+governance:
+  gates: [G0, G1, G2, G3, G4, G5a, G5b]
+  medizinischer_review: Pflicht bei entscheidungsrelevanten klinischen Aussagen
+  juristischer_review: Pflicht bei relevanten offenen Rechtsfragen
+  autopublish: false
+  automatische_kostenfreigabe: false
+  invideo: manueller Handoff
+  youtube: manueller Handoff

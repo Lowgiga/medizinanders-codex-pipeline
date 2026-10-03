@@ -1,0 +1,35 @@
+# Unvollständige Arbeitsvorlage, keine Recherche- oder Freigabenachweise.
+# Platzhalter ersetzen; Quellenzugriff und Prüfungen nur nach tatsächlicher Prüfung setzen.
+artefakt_id: A09
+projekt_id: '{{projekt_id}}'
+version: 0.1.0
+datum: '{{ISO8601}}'
+autor: '{{autor}}'
+status: Entwurf
+eingaben:
+- artefakt_id: A05
+  version: '{{A05.version}}'
+  sha256: '{{A05.sha256}}'
+- artefakt_id: A06
+  version: '{{A06.version}}'
+  sha256: '{{A06.sha256}}'
+- artefakt_id: A08
+  version: '{{A08.version}}'
+  sha256: '{{A08.sha256}}'
+quellen: []
+offene_punkte:
+- Pflichtangaben und tatsächliche Nachweise ergänzen.
+gesperrt: true
+sperrgrund: Unvollständige Vorlage; keine Produktions- oder Freigabeberechtigung.
+beispiel: false
+inhalt:
+  final:
+    path: '{{Pfad zur finalen Videodatei}}'
+    sha256: '{{SHA256 der Final-Datei}}'
+  srt:
+    path: '{{Pfad zur SRT-Datei}}'
+    sha256: '{{SHA256 der SRT-Datei}}'
+  aenderungen: []
+  musik_entfernt: false
+  getrennte_spuren: false
+  ducking_db: null

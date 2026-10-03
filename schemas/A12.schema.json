@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://medizinanders.local/schemas/A12.schema.json",
+  "title": "A12 – Auswertung und nächster Test",
+  "description": "Strukturprüfung; semantische und artefaktübergreifende Prüfungen erfolgen zusätzlich in medizinanders.validation.",
+  "allOf": [
+    {
+      "$ref": "common.schema.json#/$defs/artifact"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "artefakt_id": {
+          "const": "A12"
+        },
+        "inhalt": {
+          "type": "object",
+          "properties": {
+            "datenquelle": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "zeitraum": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "metriken": {
+              "type": "object",
+              "minProperties": 1,
+              "propertyNames": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "additionalProperties": {
+                "$ref": "common.schema.json#/$defs/metric"
+              }
+            },
+            "beobachtungen": {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "\\S"
+                  },
+                  {
+                    "type": "object"
+                  }
+                ]
+              }
+            },
+            "hypothesen": {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "\\S"
+                  },
+                  {
+                    "type": "object"
+                  }
+                ]
+              }
+            },
+            "naechster_test": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "regel_aenderung": {
+              "const": false
+            }
+          },
+          "required": [
+            "datenquelle",
+            "zeitraum",
+            "metriken",
+            "beobachtungen",
+            "hypothesen",
+            "naechster_test",
+            "regel_aenderung"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "x-abhaengigkeiten": [
+    "A11"
+  ]
+}

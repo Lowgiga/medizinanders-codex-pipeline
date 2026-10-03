@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://medizinanders.local/schemas/A03.schema.json",
+  "title": "A03 – Claim- und Risikomatrix",
+  "description": "Strukturprüfung; semantische und artefaktübergreifende Prüfungen erfolgen zusätzlich in medizinanders.validation.",
+  "allOf": [
+    {
+      "$ref": "common.schema.json#/$defs/artifact"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "artefakt_id": {
+          "const": "A03"
+        },
+        "inhalt": {
+          "type": "object",
+          "properties": {
+            "claims": {
+              "type": "array",
+              "items": {
+                "$ref": "common.schema.json#/$defs/claim"
+              },
+              "minItems": 1
+            },
+            "faktenmatrix": {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "\\S"
+                  },
+                  {
+                    "type": "object"
+                  }
+                ]
+              }
+            },
+            "risikoübersicht": {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "\\S"
+                  },
+                  {
+                    "type": "object"
+                  }
+                ]
+              }
+            },
+            "psychologie_map": {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "\\S"
+                  },
+                  {
+                    "type": "object"
+                  }
+                ]
+              }
+            },
+            "medical_review_required": {
+              "type": "boolean"
+            },
+            "legal_review_required": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "claims",
+            "faktenmatrix",
+            "risikoübersicht",
+            "psychologie_map",
+            "medical_review_required",
+            "legal_review_required"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "x-abhaengigkeiten": [
+    "A01",
+    "A02"
+  ]
+}

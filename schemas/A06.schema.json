@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://medizinanders.local/schemas/A06.schema.json",
+  "title": "A06 – Storyboard und InVideo-Prompt",
+  "description": "Strukturprüfung; semantische und artefaktübergreifende Prüfungen erfolgen zusätzlich in medizinanders.validation.",
+  "allOf": [
+    {
+      "$ref": "common.schema.json#/$defs/artifact"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "artefakt_id": {
+          "const": "A06"
+        },
+        "inhalt": {
+          "type": "object",
+          "properties": {
+            "szenen": {
+              "type": "array",
+              "items": {
+                "$ref": "common.schema.json#/$defs/scene"
+              },
+              "minItems": 7
+            },
+            "assets": {
+              "type": "array",
+              "items": {
+                "$ref": "common.schema.json#/$defs/asset"
+              }
+            },
+            "invideo_prompt": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            }
+          },
+          "required": [
+            "szenen",
+            "assets",
+            "invideo_prompt"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "x-abhaengigkeiten": [
+    "A03",
+    "A04",
+    "A05"
+  ]
+}

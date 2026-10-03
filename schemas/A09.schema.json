@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://medizinanders.local/schemas/A09.schema.json",
+  "title": "A09 – Finale Medien und Untertitel",
+  "description": "Strukturprüfung; semantische und artefaktübergreifende Prüfungen erfolgen zusätzlich in medizinanders.validation.",
+  "allOf": [
+    {
+      "$ref": "common.schema.json#/$defs/artifact"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "artefakt_id": {
+          "const": "A09"
+        },
+        "inhalt": {
+          "type": "object",
+          "properties": {
+            "final": {
+              "$ref": "common.schema.json#/$defs/file_reference"
+            },
+            "srt": {
+              "$ref": "common.schema.json#/$defs/file_reference"
+            },
+            "aenderungen": {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "\\S"
+                  },
+                  {
+                    "type": "object"
+                  }
+                ]
+              }
+            },
+            "musik_entfernt": {
+              "type": "boolean"
+            },
+            "getrennte_spuren": {
+              "type": "boolean"
+            },
+            "ducking_db": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "maximum": 0
+            }
+          },
+          "required": [
+            "final",
+            "srt",
+            "aenderungen",
+            "musik_entfernt",
+            "getrennte_spuren",
+            "ducking_db"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "x-abhaengigkeiten": [
+    "A05",
+    "A06",
+    "A08"
+  ]
+}

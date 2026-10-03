@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://medizinanders.local/schemas/A08.schema.json",
+  "title": "A08 – Echter Preview-Render",
+  "description": "Strukturprüfung; semantische und artefaktübergreifende Prüfungen erfolgen zusätzlich in medizinanders.validation.",
+  "allOf": [
+    {
+      "$ref": "common.schema.json#/$defs/artifact"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "artefakt_id": {
+          "const": "A08"
+        },
+        "inhalt": {
+          "type": "object",
+          "properties": {
+            "preview": {
+              "$ref": "common.schema.json#/$defs/file_reference"
+            },
+            "render_real": {
+              "type": "boolean"
+            },
+            "operator": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "render_zeitpunkt": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "freeze": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            }
+          },
+          "required": [
+            "preview",
+            "render_real",
+            "operator",
+            "render_zeitpunkt",
+            "freeze"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "x-abhaengigkeiten": [
+    "A07"
+  ]
+}

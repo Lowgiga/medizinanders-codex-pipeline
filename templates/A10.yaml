@@ -1,0 +1,79 @@
+# Unvollständige Arbeitsvorlage, keine Recherche- oder Freigabenachweise.
+# Platzhalter ersetzen; Quellenzugriff und Prüfungen nur nach tatsächlicher Prüfung setzen.
+artefakt_id: A10
+projekt_id: '{{projekt_id}}'
+version: 0.1.0
+datum: '{{ISO8601}}'
+autor: '{{autor}}'
+status: Entwurf
+eingaben:
+- artefakt_id: A07
+  version: '{{A07.version}}'
+  sha256: '{{A07.sha256}}'
+- artefakt_id: A08
+  version: '{{A08.version}}'
+  sha256: '{{A08.sha256}}'
+- artefakt_id: A09
+  version: '{{A09.version}}'
+  sha256: '{{A09.sha256}}'
+quellen: []
+offene_punkte:
+- Pflichtangaben und tatsächliche Nachweise ergänzen.
+gesperrt: true
+sperrgrund: Unvollständige Vorlage; keine Produktions- oder Freigabeberechtigung.
+beispiel: false
+inhalt:
+  technische_reports: []
+  findings: []
+  pflichtpruefungen:
+  - id: voiceover_exact
+    anwendbar: true
+    erledigt: false
+    nachweis: ''
+  - id: pronunciation
+    anwendbar: true
+    erledigt: false
+    nachweis: ''
+  - id: subtitle_sync_100ms
+    anwendbar: true
+    erledigt: false
+    nachweis: ''
+  - id: subtitle_visual
+    anwendbar: true
+    erledigt: false
+    nachweis: ''
+  - id: font_layout
+    anwendbar: true
+    erledigt: false
+    nachweis: ''
+  - id: burned_subtitles
+    anwendbar: true
+    erledigt: false
+    nachweis: ''
+  - id: smartphone_listening
+    anwendbar: true
+    erledigt: false
+    nachweis: ''
+  - id: disclaimer_visual
+    anwendbar: true
+    erledigt: false
+    nachweis: ''
+  - id: rights
+    anwendbar: true
+    erledigt: false
+    nachweis: ''
+  - id: ai_label
+    anwendbar: true
+    erledigt: false
+    nachweis: ''
+  - id: patient_privacy
+    anwendbar: true
+    erledigt: false
+    nachweis: ''
+  - id: audio_music_verified
+    anwendbar: true
+    erledigt: false
+    nachweis: ''
+  ergebnis: pruefung_unvollstaendig
+  preview_sha256: '{{SHA256 der Preview-Datei}}'
+  final_sha256: null

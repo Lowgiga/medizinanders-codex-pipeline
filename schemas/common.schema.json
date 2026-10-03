@@ -1,0 +1,826 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://medizinanders.local/schemas/common.schema.json",
+  "title": "MedizinAnders – gemeinsame Artefaktfelder und überprüfbare Statements",
+  "$defs": {
+    "artifact": {
+      "type": "object",
+      "properties": {
+        "artefakt_id": {
+          "type": "string",
+          "pattern": "^A(?:0[1-9]|1[0-2])$"
+        },
+        "projekt_id": {
+          "type": "string",
+          "pattern": "^MA-[0-9]{8}-[0-9]{3}$"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-(?:0|[1-9]\\d*|\\d*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[A-Za-z-][0-9A-Za-z-]*))*)?(?:\\+[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?$"
+        },
+        "datum": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "string",
+              "format": "date"
+            }
+          ]
+        },
+        "autor": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "status": {
+          "enum": [
+            "Entwurf",
+            "geprüft",
+            "freigegeben",
+            "produziert",
+            "veröffentlicht"
+          ]
+        },
+        "eingaben": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "artefakt_id": {
+                "type": "string",
+                "pattern": "^A(?:0[1-9]|1[0-2])$"
+              },
+              "version": {
+                "type": "string",
+                "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-(?:0|[1-9]\\d*|\\d*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[A-Za-z-][0-9A-Za-z-]*))*)?(?:\\+[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?$"
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              }
+            },
+            "required": [
+              "artefakt_id",
+              "version",
+              "sha256"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "quellen": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "uniqueItems": true
+        },
+        "offene_punkte": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        },
+        "gesperrt": {
+          "type": "boolean"
+        },
+        "sperrgrund": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "beispiel": {
+          "type": "boolean"
+        },
+        "inhalt": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "artefakt_id",
+        "projekt_id",
+        "version",
+        "datum",
+        "autor",
+        "status",
+        "eingaben",
+        "quellen",
+        "offene_punkte",
+        "gesperrt",
+        "sperrgrund",
+        "beispiel",
+        "inhalt"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "gesperrt": {
+                "const": true
+              }
+            },
+            "required": [
+              "gesperrt"
+            ]
+          },
+          "then": {
+            "properties": {
+              "sperrgrund": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "sperrgrund": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "statement": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "faktisch": {
+          "type": "boolean"
+        },
+        "claim_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "text",
+        "faktisch",
+        "claim_ids"
+      ],
+      "additionalProperties": false
+    },
+    "finding": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "datei": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "problem": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "soll": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "ist": {
+          "type": "string"
+        },
+        "schwere": {
+          "enum": [
+            "K0",
+            "K1",
+            "K2"
+          ]
+        },
+        "rueckweg": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "offen": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "datei",
+        "problem",
+        "soll",
+        "ist",
+        "schwere",
+        "rueckweg",
+        "offen"
+      ],
+      "additionalProperties": false
+    },
+    "mandatory_check": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "anwendbar": {
+          "type": "boolean"
+        },
+        "erledigt": {
+          "type": "boolean"
+        },
+        "nachweis": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "anwendbar",
+        "erledigt",
+        "nachweis"
+      ],
+      "additionalProperties": false
+    },
+    "source": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "titel": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "typ": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "zugriff": {
+          "enum": [
+            "geprueft",
+            "nicht_geprueft"
+          ]
+        },
+        "fundstelle": {
+          "type": "string"
+        },
+        "abgerufen_am": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "string",
+              "format": "date"
+            }
+          ]
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "original_geoeffnet": {
+          "type": "boolean"
+        },
+        "lokaler_pfad": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "klinische_parameter": {
+          "type": "object",
+          "properties": {
+            "population": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "\\S"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "design": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "\\S"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "vergleich": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "\\S"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "endpunkt": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "\\S"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "absolute_wirkung": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "\\S"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "relative_wirkung": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "\\S"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "unsicherheit": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "\\S"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "interessenkonflikte": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "\\S"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "grenzen": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "\\S"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "population",
+            "design",
+            "vergleich",
+            "endpunkt",
+            "absolute_wirkung",
+            "relative_wirkung",
+            "unsicherheit",
+            "interessenkonflikte",
+            "grenzen"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "id",
+        "url",
+        "titel",
+        "typ",
+        "zugriff",
+        "fundstelle",
+        "abgerufen_am",
+        "sha256",
+        "original_geoeffnet",
+        "lokaler_pfad",
+        "klinische_parameter"
+      ],
+      "additionalProperties": false
+    },
+    "claim": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "status": {
+          "enum": [
+            "BESTÄTIGT",
+            "TEILWEISE",
+            "WIDERLEGT",
+            "UNBEWIESEN"
+          ]
+        },
+        "einsatz": {
+          "enum": [
+            "ja",
+            "nur_mit_einschraenkung",
+            "nein"
+          ]
+        },
+        "source_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "uniqueItems": true
+        },
+        "fundstellen": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        },
+        "gegenbelege": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              {
+                "type": "object"
+              }
+            ]
+          }
+        },
+        "einschraenkungen": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        },
+        "risiken": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        },
+        "medizinisch_relevant": {
+          "type": "boolean"
+        },
+        "rechtlich_relevant": {
+          "type": "boolean"
+        },
+        "art": {
+          "enum": [
+            "sachverhalt",
+            "quellenbehauptung"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "text",
+        "status",
+        "einsatz",
+        "source_ids",
+        "fundstellen",
+        "gegenbelege",
+        "einschraenkungen",
+        "risiken",
+        "medizinisch_relevant",
+        "rechtlich_relevant",
+        "art"
+      ],
+      "additionalProperties": false
+    },
+    "scene": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "start_ms": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 58000
+        },
+        "ende_ms": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 58000
+        },
+        "sprechertext": {
+          "type": "string"
+        },
+        "funktion": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "motiv": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "assets": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "uniqueItems": true
+        },
+        "sync_anker": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object"
+            }
+          ]
+        },
+        "overlay": {
+          "type": "string"
+        },
+        "quellenhinweis": {
+          "type": "string"
+        },
+        "uebergang": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "audio": {
+          "type": "object",
+          "properties": {
+            "voiceover": {
+              "type": "boolean"
+            },
+            "musik": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "voiceover",
+            "musik"
+          ],
+          "additionalProperties": false
+        },
+        "claim_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "id",
+        "start_ms",
+        "ende_ms",
+        "sprechertext",
+        "funktion",
+        "motiv",
+        "assets",
+        "sync_anker",
+        "overlay",
+        "quellenhinweis",
+        "uebergang",
+        "audio",
+        "claim_ids"
+      ],
+      "additionalProperties": false
+    },
+    "asset": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "typ": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "herkunft": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "recht_status": {
+          "enum": [
+            "geklaert",
+            "offen"
+          ]
+        },
+        "nachweis": {
+          "type": "string"
+        },
+        "ki_illustration": {
+          "type": "boolean"
+        },
+        "imitierte_stimme": {
+          "type": "boolean"
+        },
+        "kennzeichnung": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "id",
+        "typ",
+        "herkunft",
+        "recht_status",
+        "nachweis",
+        "ki_illustration",
+        "imitierte_stimme"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "ki_illustration": {
+                "const": true
+              }
+            },
+            "required": [
+              "ki_illustration"
+            ]
+          },
+          "then": {
+            "required": [
+              "kennzeichnung"
+            ]
+          }
+        }
+      ]
+    },
+    "metric": {
+      "type": "object",
+      "properties": {
+        "wert": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "begruendung": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "wert",
+        "begruendung"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "wert": {
+                "type": "null"
+              }
+            },
+            "required": [
+              "wert"
+            ]
+          },
+          "then": {
+            "properties": {
+              "begruendung": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "file_reference": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,41 @@
+# Unvollständige Arbeitsvorlage, keine Recherche- oder Freigabenachweise.
+# Platzhalter ersetzen; Quellenzugriff und Prüfungen nur nach tatsächlicher Prüfung setzen.
+artefakt_id: A03
+projekt_id: '{{projekt_id}}'
+version: 0.1.0
+datum: '{{ISO8601}}'
+autor: '{{autor}}'
+status: Entwurf
+eingaben:
+- artefakt_id: A01
+  version: '{{A01.version}}'
+  sha256: '{{A01.sha256}}'
+- artefakt_id: A02
+  version: '{{A02.version}}'
+  sha256: '{{A02.sha256}}'
+quellen: []
+offene_punkte:
+- Pflichtangaben und tatsächliche Nachweise ergänzen.
+gesperrt: true
+sperrgrund: Unvollständige Vorlage; keine Produktions- oder Freigabeberechtigung.
+beispiel: false
+inhalt:
+  claims:
+  - id: C001
+    text: '{{Zu überprüfende Aussage}}'
+    status: UNBEWIESEN
+    einsatz: nein
+    source_ids: []
+    fundstellen: []
+    gegenbelege: []
+    einschraenkungen: []
+    risiken:
+    - Prüfung noch nicht abgeschlossen
+    medizinisch_relevant: true
+    rechtlich_relevant: false
+    art: sachverhalt
+  faktenmatrix: []
+  risikoübersicht: []
+  psychologie_map: []
+  medical_review_required: true
+  legal_review_required: false

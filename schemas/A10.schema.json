@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://medizinanders.local/schemas/A10.schema.json",
+  "title": "A10 – Technische Qualitätssicherung",
+  "description": "Strukturprüfung; semantische und artefaktübergreifende Prüfungen erfolgen zusätzlich in medizinanders.validation.",
+  "allOf": [
+    {
+      "$ref": "common.schema.json#/$defs/artifact"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "artefakt_id": {
+          "const": "A10"
+        },
+        "inhalt": {
+          "type": "object",
+          "properties": {
+            "technische_reports": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "findings": {
+              "type": "array",
+              "items": {
+                "$ref": "common.schema.json#/$defs/finding"
+              }
+            },
+            "pflichtpruefungen": {
+              "type": "array",
+              "items": {
+                "$ref": "common.schema.json#/$defs/mandatory_check"
+              },
+              "minItems": 12
+            },
+            "ergebnis": {
+              "enum": [
+                "freigabefaehig",
+                "nacharbeit_erforderlich",
+                "pruefung_unvollstaendig"
+              ]
+            },
+            "preview_sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "final_sha256": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[a-f0-9]{64}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "technische_reports",
+            "findings",
+            "pflichtpruefungen",
+            "ergebnis",
+            "preview_sha256",
+            "final_sha256"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "x-abhaengigkeiten": [
+    "A07",
+    "A08",
+    "A09"
+  ],
+  "x-pflichtpruefungen": [
+    "voiceover_exact",
+    "pronunciation",
+    "subtitle_sync_100ms",
+    "subtitle_visual",
+    "font_layout",
+    "burned_subtitles",
+    "smartphone_listening",
+    "disclaimer_visual",
+    "rights",
+    "ai_label",
+    "patient_privacy",
+    "audio_music_verified"
+  ]
+}

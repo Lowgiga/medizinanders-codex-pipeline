@@ -1,0 +1,17 @@
+# Lokale Kopie erzeugt `ma setup`, niemals diese Datei mit persönlichen Daten füllen.
+verantwortliche_person: null
+umgebung: null
+datenschutz_bestaetigt: false
+rollenprompts_geprueft: false
+speicherort_bestaetigt: false
+tools_geprueft: false
+invideo_moeglichkeiten: null
+budget_eur: null
+zeitlimit_minuten: null
+zielgruppe: null
+stimme: null
+codex_nutzung_bestaetigt: false
+research_web_bestaetigt: false
+font_path: null
+worker_timeout_seconds: 900
+max_worker_starts: 8

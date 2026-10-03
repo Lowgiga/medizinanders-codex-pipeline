@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://medizinanders.local/schemas/A11.schema.json",
+  "title": "A11 – Veröffentlichung",
+  "description": "Strukturprüfung; semantische und artefaktübergreifende Prüfungen erfolgen zusätzlich in medizinanders.validation.",
+  "allOf": [
+    {
+      "$ref": "common.schema.json#/$defs/artifact"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "artefakt_id": {
+          "const": "A11"
+        },
+        "inhalt": {
+          "type": "object",
+          "properties": {
+            "final_sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "youtube_id": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "\\S"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "url": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uri"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "visibility": {
+              "enum": [
+                "vorbereitet",
+                "privat",
+                "oeffentlich"
+              ]
+            },
+            "ki_kennzeichnung": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "zielgruppe": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "\\S"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "werbung": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "playback_pruefung": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "veroeffentlicht_am": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "final_sha256",
+            "youtube_id",
+            "url",
+            "visibility",
+            "ki_kennzeichnung",
+            "zielgruppe",
+            "werbung",
+            "playback_pruefung",
+            "veroeffentlicht_am"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "x-abhaengigkeiten": [
+    "A05",
+    "A10"
+  ]
+}

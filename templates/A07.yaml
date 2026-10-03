@@ -1,0 +1,66 @@
+# Unvollständige Arbeitsvorlage, keine Recherche- oder Freigabenachweise.
+# Platzhalter ersetzen; Quellenzugriff und Prüfungen nur nach tatsächlicher Prüfung setzen.
+artefakt_id: A07
+projekt_id: '{{projekt_id}}'
+version: 0.1.0
+datum: '{{ISO8601}}'
+autor: '{{autor}}'
+status: Entwurf
+eingaben:
+- artefakt_id: A01
+  version: '{{A01.version}}'
+  sha256: '{{A01.sha256}}'
+- artefakt_id: A02
+  version: '{{A02.version}}'
+  sha256: '{{A02.sha256}}'
+- artefakt_id: A03
+  version: '{{A03.version}}'
+  sha256: '{{A03.sha256}}'
+- artefakt_id: A04
+  version: '{{A04.version}}'
+  sha256: '{{A04.sha256}}'
+- artefakt_id: A05
+  version: '{{A05.version}}'
+  sha256: '{{A05.sha256}}'
+- artefakt_id: A06
+  version: '{{A06.version}}'
+  sha256: '{{A06.sha256}}'
+quellen: []
+offene_punkte:
+- Pflichtangaben und tatsächliche Nachweise ergänzen.
+gesperrt: true
+sperrgrund: Unvollständige Vorlage; keine Produktions- oder Freigabeberechtigung.
+beispiel: false
+inhalt:
+  ergebnis: pruefung_unvollstaendig
+  findings: []
+  pflichtpruefungen:
+  - id: claim_sentence_map
+    anwendbar: true
+    erledigt: false
+    nachweis: ''
+  - id: sources_originals
+    anwendbar: true
+    erledigt: false
+    nachweis: ''
+  - id: counterevidence_uncertainty
+    anwendbar: true
+    erledigt: false
+    nachweis: ''
+  - id: medical_legal_escalation
+    anwendbar: true
+    erledigt: false
+    nachweis: ''
+  - id: timeline_cta_disclaimer
+    anwendbar: true
+    erledigt: false
+    nachweis: ''
+  - id: assets_rights
+    anwendbar: true
+    erledigt: false
+    nachweis: ''
+  - id: invideo_complete
+    anwendbar: true
+    erledigt: false
+    nachweis: ''
+  freeze: null

@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://medizinanders.local/schemas/A07.schema.json",
+  "title": "A07 – Redaktionelle Qualitätssicherung",
+  "description": "Strukturprüfung; semantische und artefaktübergreifende Prüfungen erfolgen zusätzlich in medizinanders.validation.",
+  "allOf": [
+    {
+      "$ref": "common.schema.json#/$defs/artifact"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "artefakt_id": {
+          "const": "A07"
+        },
+        "inhalt": {
+          "type": "object",
+          "properties": {
+            "ergebnis": {
+              "enum": [
+                "freigabefaehig",
+                "nacharbeit_erforderlich",
+                "pruefung_unvollstaendig"
+              ]
+            },
+            "findings": {
+              "type": "array",
+              "items": {
+                "$ref": "common.schema.json#/$defs/finding"
+              }
+            },
+            "pflichtpruefungen": {
+              "type": "array",
+              "items": {
+                "$ref": "common.schema.json#/$defs/mandatory_check"
+              },
+              "minItems": 7
+            },
+            "freeze": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "\\S"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "ergebnis",
+            "findings",
+            "pflichtpruefungen",
+            "freeze"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "x-abhaengigkeiten": [
+    "A01",
+    "A02",
+    "A03",
+    "A04",
+    "A05",
+    "A06"
+  ],
+  "x-pflichtpruefungen": [
+    "claim_sentence_map",
+    "sources_originals",
+    "counterevidence_uncertainty",
+    "medical_legal_escalation",
+    "timeline_cta_disclaimer",
+    "assets_rights",
+    "invideo_complete"
+  ]
+}

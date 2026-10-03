@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://medizinanders.local/schemas/A01.schema.json",
+  "title": "A01 – Briefing",
+  "description": "Strukturprüfung; semantische und artefaktübergreifende Prüfungen erfolgen zusätzlich in medizinanders.validation.",
+  "allOf": [
+    {
+      "$ref": "common.schema.json#/$defs/artifact"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "artefakt_id": {
+          "const": "A01"
+        },
+        "inhalt": {
+          "type": "object",
+          "properties": {
+            "kernfrage": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "nutzen": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "scope": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              }
+            },
+            "ausschluesse": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              }
+            },
+            "suchfragen": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "minItems": 1
+            },
+            "format": {
+              "const": "MA-SHORT-58-v1.0"
+            },
+            "ressourcen": {
+              "type": "object"
+            },
+            "offene_entscheidungen": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              }
+            }
+          },
+          "required": [
+            "kernfrage",
+            "nutzen",
+            "scope",
+            "ausschluesse",
+            "suchfragen",
+            "format",
+            "ressourcen",
+            "offene_entscheidungen"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "x-abhaengigkeiten": []
+}

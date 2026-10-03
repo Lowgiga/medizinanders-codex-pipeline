@@ -1,0 +1,190 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://medizinanders.local/schemas/A05.schema.json",
+  "title": "A05 – Sprechertext und Metadaten",
+  "description": "Strukturprüfung; semantische und artefaktübergreifende Prüfungen erfolgen zusätzlich in medizinanders.validation.",
+  "allOf": [
+    {
+      "$ref": "common.schema.json#/$defs/artifact"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "artefakt_id": {
+          "const": "A05"
+        },
+        "inhalt": {
+          "type": "object",
+          "properties": {
+            "sprechertext": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "wortzahl": {
+              "type": "integer",
+              "minimum": 100,
+              "maximum": 130
+            },
+            "saetze": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "\\S"
+                  },
+                  "text": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "\\S"
+                  },
+                  "faktisch": {
+                    "type": "boolean"
+                  },
+                  "claim_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "pattern": "\\S"
+                    },
+                    "uniqueItems": true
+                  },
+                  "funktion": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "\\S"
+                  }
+                },
+                "required": [
+                  "id",
+                  "text",
+                  "faktisch",
+                  "claim_ids",
+                  "funktion"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1
+            },
+            "untertitel_basis": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "aussprache": {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "\\S"
+                  },
+                  {
+                    "type": "object"
+                  }
+                ]
+              }
+            },
+            "overlays": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "\\S"
+                  },
+                  "faktisch": {
+                    "type": "boolean"
+                  },
+                  "claim_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "pattern": "\\S"
+                    },
+                    "uniqueItems": true
+                  },
+                  "start_ms": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 58000
+                  },
+                  "ende_ms": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 58000
+                  }
+                },
+                "required": [
+                  "text",
+                  "faktisch",
+                  "claim_ids",
+                  "start_ms",
+                  "ende_ms"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "titel": {
+              "$ref": "common.schema.json#/$defs/statement"
+            },
+            "thumbnail": {
+              "$ref": "common.schema.json#/$defs/statement"
+            },
+            "beschreibung": {
+              "$ref": "common.schema.json#/$defs/statement"
+            },
+            "quellenangaben": {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "\\S"
+                  },
+                  {
+                    "type": "object"
+                  }
+                ]
+              }
+            },
+            "cta": {
+              "$ref": "common.schema.json#/$defs/statement"
+            },
+            "disclaimer": {
+              "const": "Journalistischer Analyse-Content. Kein medizinischer Rat."
+            }
+          },
+          "required": [
+            "sprechertext",
+            "wortzahl",
+            "saetze",
+            "untertitel_basis",
+            "aussprache",
+            "overlays",
+            "titel",
+            "thumbnail",
+            "beschreibung",
+            "quellenangaben",
+            "cta",
+            "disclaimer"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "x-abhaengigkeiten": [
+    "A03",
+    "A04"
+  ]
+}
