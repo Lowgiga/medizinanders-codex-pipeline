@@ -6,6 +6,8 @@ verwaltet Versionen und stoppt mit konkreten Anweisungen an jedem Human Gate.
 InVideo und YouTube werden manuell bedient. Es gibt keinen Server und keine eigene
 OpenAI-API-Abhängigkeit.
 
+Die vollständige kompakte Übergabe steht im [Handoff](docs/HANDOFF.md).
+
 ## Einmal einrichten
 
 Voraussetzungen: Linux oder macOS, Python 3.11+, Git, angemeldete Codex CLI und
