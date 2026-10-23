@@ -2,7 +2,7 @@
 # Installation zusammen mit dem editierbaren Git-Checkout.
 PyYAML==6.0.3
 jsonschema==4.26.0
-Pillow==12.3.0
+Pillow==13.0.0
 attrs==26.1.0
 jsonschema-specifications==2025.9.1
 referencing==0.37.0
